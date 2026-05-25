@@ -16,123 +16,123 @@
 
 <body>
 
-    <div class="dashboard-wrapper">
+    <!-- NAVBAR -->
 
-        <!-- Navbar -->
+    <div class="top-navbar">
 
-        <div class="navbar">
+        <div class="logo">
+            Student Portal
+        </div>
 
-            <h2>Student Portal</h2>
+        <div class="nav-menu">
 
-            <div class="nav-links">
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
 
-                <a href="dashboard.html" class="active">
-                    Dashboard
-                </a>
+            <a href="students.html">
+                Students
+            </a>
 
-                <a href="students.html">
-                    Students
-                </a>
+            <a href="courses.html">
+                Courses
+            </a>
 
-                <a href="courses.html">
-                    Courses
-                </a>
-
-                <a href="index.html" onclick="logout()">
-                    Logout
-                </a>
-
-            </div>
+            <a href="index.html" onclick="logout()">
+                Logout
+            </a>
 
         </div>
 
-        <!-- Welcome Section -->
+    </div>
 
-        <div class="welcome-box">
+    <!-- MAIN CONTENT -->
+
+    <div class="dashboard-main">
+
+        <!-- PAGE TITLE -->
+
+        <div class="dashboard-header">
 
             <h1>
-                Welcome, Anandu Pillai 👋
+                Dashboard
             </h1>
 
             <p>
-                Computer Science Department
+                Overview of Students and Courses
             </p>
 
         </div>
 
-        <!-- Stats -->
+        <!-- STATS -->
 
-        <div class="stats-container">
+        <div class="stats-grid">
 
-            <div class="stat-card">
+            <div class="stats-box">
 
-                <h2 id="studentCount">0</h2>
+                <h2 id="studentCount">
+                    0
+                </h2>
 
-                <p>Total Students</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h2 id="courseCount">0</h2>
-
-                <p>Total Courses</p>
+                <p>
+                    Students
+                </p>
 
             </div>
 
-            <div class="stat-card">
+            <div class="stats-box">
 
-                <h2>8.4</h2>
+                <h2 id="courseCount">
+                    0
+                </h2>
 
-                <p>CGPA</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h2>82%</h2>
-
-                <p>Attendance</p>
+                <p>
+                    Courses
+                </p>
 
             </div>
 
         </div>
 
-        <!-- Recent Students -->
+        <!-- STUDENT SECTION -->
 
-        <div class="dashboard-section">
+        <div class="dashboard-card">
 
-            <div class="section-header">
+            <div class="card-header">
 
-                <h2>Recent Students</h2>
+                <h2>
+                    Recent Students
+                </h2>
 
                 <a href="students.html">
-                    Add Students
+                    Add Student
                 </a>
 
             </div>
 
-            <div id="recentStudents">
+            <div id="studentList">
 
             </div>
 
         </div>
 
-        <!-- Recent Courses -->
+        <!-- COURSE SECTION -->
 
-        <div class="dashboard-section">
+        <div class="dashboard-card">
 
-            <div class="section-header">
+            <div class="card-header">
 
-                <h2>Recent Courses</h2>
+                <h2>
+                    Recent Courses
+                </h2>
 
                 <a href="courses.html">
-                    Add Courses
+                    Add Course
                 </a>
 
             </div>
 
-            <div id="recentCourses">
+            <div id="courseList">
 
             </div>
 
@@ -144,27 +144,27 @@
 
         // STUDENTS
 
-        let students =
+        const students =
         JSON.parse(localStorage.getItem("students")) || [];
 
-        let studentContainer =
-        document.getElementById("recentStudents");
+        const studentList =
+        document.getElementById("studentList");
 
         document.getElementById("studentCount").innerText =
         students.length;
 
         if(students.length === 0)
         {
-            studentContainer.innerHTML = `
+            studentList.innerHTML = `
             
-            <div class="empty-box">
+            <div class="empty-message">
 
-                No students added yet.
+                No students available.
 
                 <br><br>
 
                 <a href="students.html">
-                    Go to Students Page
+                    Add Students
                 </a>
 
             </div>
@@ -173,17 +173,23 @@
         }
         else
         {
-            students.slice(-3).reverse().forEach(student =>
+            students.slice(-5).reverse().forEach(student =>
             {
-                studentContainer.innerHTML += `
+                studentList.innerHTML += `
                 
-                <div class="dashboard-item">
+                <div class="list-item">
 
-                    <h3>${student.name}</h3>
+                    <div>
 
-                    <p>${student.roll}</p>
+                        <h3>${student.name}</h3>
 
-                    <span>${student.department}</span>
+                        <p>${student.roll}</p>
+
+                    </div>
+
+                    <span>
+                        ${student.department}
+                    </span>
 
                 </div>
                 
@@ -193,27 +199,27 @@
 
         // COURSES
 
-        let courses =
+        const courses =
         JSON.parse(localStorage.getItem("courses")) || [];
 
-        let courseContainer =
-        document.getElementById("recentCourses");
+        const courseList =
+        document.getElementById("courseList");
 
         document.getElementById("courseCount").innerText =
         courses.length;
 
         if(courses.length === 0)
         {
-            courseContainer.innerHTML = `
+            courseList.innerHTML = `
             
-            <div class="empty-box">
+            <div class="empty-message">
 
-                No courses added yet.
+                No courses available.
 
                 <br><br>
 
                 <a href="courses.html">
-                    Go to Courses Page
+                    Add Courses
                 </a>
 
             </div>
@@ -222,17 +228,23 @@
         }
         else
         {
-            courses.slice(-3).reverse().forEach(course =>
+            courses.slice(-5).reverse().forEach(course =>
             {
-                courseContainer.innerHTML += `
+                courseList.innerHTML += `
                 
-                <div class="dashboard-item">
+                <div class="list-item">
 
-                    <h3>${course.courseName}</h3>
+                    <div>
 
-                    <p>${course.courseCode}</p>
+                        <h3>${course.courseName}</h3>
 
-                    <span>${course.faculty}</span>
+                        <p>${course.courseCode}</p>
+
+                    </div>
+
+                    <span>
+                        ${course.faculty}
+                    </span>
 
                 </div>
                 
