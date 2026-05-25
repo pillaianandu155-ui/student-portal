@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Courses</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>Student Portal</h2>
+
+            <ul>
+
+                <li>
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="students.html">
+                        Students
+                    </a>
+                </li>
+
+                <li>
+                    <a href="courses.html" class="active">
+                        Courses
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html" onclick="logout()">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            <div class="topbar">
+
+                <h1>Course Management</h1>
+
+                <p>
+                    View and Manage Course Details
+                </p>
+
+            </div>
+
+            <!-- Add Course Form -->
+
+            <div class="form-container">
+
+                <h2>Add New Course</h2>
+
+                <form id="courseForm">
+
+                    <div class="form-grid">
+
+                        <input
+                            type="text"
+                            id="courseCode"
+                            placeholder="Course Code"
+                            required
+                        >
+
+                        <input
+                            type="text"
+                            id="courseName"
+                            placeholder="Course Name"
+                            required
+                        >
+
+                        <input
+                            type="text"
+                            id="faculty"
+                            placeholder="Faculty Name"
+                            required
+                        >
+
+                        <input
+                            type="number"
+                            id="credits"
+                            placeholder="Credits"
+                            required
+                        >
+
+                        <input
+                            type="text"
+                            id="schedule"
+                            placeholder="Schedule"
+                            required
+                        >
+
+                        <input
+                            type="text"
+                            id="room"
+                            placeholder="Room Number"
+                            required
+                        >
+
+                    </div>
+
+                    <button type="submit" class="add-btn">
+                        Add Course
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- Courses Table -->
+
+            <div class="table-container">
+
+                <h2>Available Courses</h2>
+
+                <table id="courseTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Course Code</th>
+
+                            <th>Course Name</th>
+
+                            <th>Faculty</th>
+
+                            <th>Credits</th>
+
+                            <th>Schedule</th>
+
+                            <th>Room</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <!-- Dynamic Data -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

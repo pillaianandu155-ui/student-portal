@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Navbar -->
+
+        <div class="navbar">
+
+            <h2>Student Portal</h2>
+
+            <div class="nav-links">
+
+                <a href="dashboard.html" class="active">
+                    Dashboard
+                </a>
+
+                <a href="students.html">
+                    Students
+                </a>
+
+                <a href="courses.html">
+                    Courses
+                </a>
+
+                <a href="index.html" onclick="logout()">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Welcome Section -->
+
+        <div class="welcome-box">
+
+            <h1>
+                Welcome, Anandu Pillai 👋
+            </h1>
+
+            <p>
+                Computer Science Department
+            </p>
+
+        </div>
+
+        <!-- Stats -->
+
+        <div class="stats-container">
+
+            <div class="stat-card">
+
+                <h2 id="studentCount">0</h2>
+
+                <p>Total Students</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="courseCount">0</h2>
+
+                <p>Total Courses</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2>8.4</h2>
+
+                <p>CGPA</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2>82%</h2>
+
+                <p>Attendance</p>
+
+            </div>
+
+        </div>
+
+        <!-- Recent Students -->
+
+        <div class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Recent Students</h2>
+
+                <a href="students.html">
+                    Add Students
+                </a>
+
+            </div>
+
+            <div id="recentStudents">
+
+            </div>
+
+        </div>
+
+        <!-- Recent Courses -->
+
+        <div class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Recent Courses</h2>
+
+                <a href="courses.html">
+                    Add Courses
+                </a>
+
+            </div>
+
+            <div id="recentCourses">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // STUDENTS
+
+        let students =
+        JSON.parse(localStorage.getItem("students")) || [];
+
+        let studentContainer =
+        document.getElementById("recentStudents");
+
+        document.getElementById("studentCount").innerText =
+        students.length;
+
+        if(students.length === 0)
+        {
+            studentContainer.innerHTML = `
+            
+            <div class="empty-box">
+
+                No students added yet.
+
+                <br><br>
+
+                <a href="students.html">
+                    Go to Students Page
+                </a>
+
+            </div>
+            
+            `;
+        }
+        else
+        {
+            students.slice(-3).reverse().forEach(student =>
+            {
+                studentContainer.innerHTML += `
+                
+                <div class="dashboard-item">
+
+                    <h3>${student.name}</h3>
+
+                    <p>${student.roll}</p>
+
+                    <span>${student.department}</span>
+
+                </div>
+                
+                `;
+            });
+        }
+
+        // COURSES
+
+        let courses =
+        JSON.parse(localStorage.getItem("courses")) || [];
+
+        let courseContainer =
+        document.getElementById("recentCourses");
+
+        document.getElementById("courseCount").innerText =
+        courses.length;
+
+        if(courses.length === 0)
+        {
+            courseContainer.innerHTML = `
+            
+            <div class="empty-box">
+
+                No courses added yet.
+
+                <br><br>
+
+                <a href="courses.html">
+                    Go to Courses Page
+                </a>
+
+            </div>
+            
+            `;
+        }
+        else
+        {
+            courses.slice(-3).reverse().forEach(course =>
+            {
+                courseContainer.innerHTML += `
+                
+                <div class="dashboard-item">
+
+                    <h3>${course.courseName}</h3>
+
+                    <p>${course.courseCode}</p>
+
+                    <span>${course.faculty}</span>
+
+                </div>
+                
+                `;
+            });
+        }
+
+        // LOGOUT
+
+        function logout()
+        {
+            localStorage.removeItem("loggedIn");
+        }
+
+    </script>
+
+</body>
+</html>
