@@ -3,13 +3,10 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
@@ -25,23 +22,10 @@
         </div>
 
         <div class="nav-menu">
-
-            <a href="dashboard.html" class="active">
-                Dashboard
-            </a>
-
-            <a href="students.html">
-                Students
-            </a>
-
-            <a href="courses.html">
-                Courses
-            </a>
-
-            <a href="index.html" onclick="logout()">
-                Logout
-            </a>
-
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="courses.html">Courses</a>
+            <a href="index.html" onclick="logout()">Logout</a>
         </div>
 
     </div>
@@ -53,15 +37,8 @@
         <!-- PAGE TITLE -->
 
         <div class="dashboard-header">
-
-            <h1>
-                Dashboard
-            </h1>
-
-            <p>
-                Overview of Students and Courses
-            </p>
-
+            <h1>Dashboard</h1>
+            <p>Overview of Students and Courses</p>
         </div>
 
         <!-- STATS -->
@@ -69,27 +46,13 @@
         <div class="stats-grid">
 
             <div class="stats-box">
-
-                <h2 id="studentCount">
-                    0
-                </h2>
-
-                <p>
-                    Students
-                </p>
-
+                <h2 id="studentCount">0</h2>
+                <p>Students</p>
             </div>
 
             <div class="stats-box">
-
-                <h2 id="courseCount">
-                    0
-                </h2>
-
-                <p>
-                    Courses
-                </p>
-
+                <h2 id="courseCount">0</h2>
+                <p>Courses</p>
             </div>
 
         </div>
@@ -99,20 +62,11 @@
         <div class="dashboard-card">
 
             <div class="card-header">
-
-                <h2>
-                    Recent Students
-                </h2>
-
-                <a href="students.html">
-                    Add Student
-                </a>
-
+                <h2>Recent Students</h2>
+                <a href="students.html">Add Student</a>
             </div>
 
-            <div id="studentList">
-
-            </div>
+            <div id="studentList"></div>
 
         </div>
 
@@ -121,20 +75,11 @@
         <div class="dashboard-card">
 
             <div class="card-header">
-
-                <h2>
-                    Recent Courses
-                </h2>
-
-                <a href="courses.html">
-                    Add Course
-                </a>
-
+                <h2>Recent Courses</h2>
+                <a href="courses.html">Add Course</a>
             </div>
 
-            <div id="courseList">
-
-            </div>
+            <div id="courseList"></div>
 
         </div>
 
@@ -144,118 +89,63 @@
 
         // STUDENTS
 
-        const students =
-        JSON.parse(localStorage.getItem("students")) || [];
+        const students = JSON.parse(localStorage.getItem("students")) || [];
+        const studentList = document.getElementById("studentList");
 
-        const studentList =
-        document.getElementById("studentList");
+        document.getElementById("studentCount").innerText = students.length;
 
-        document.getElementById("studentCount").innerText =
-        students.length;
-
-        if(students.length === 0)
-        {
+        if (students.length === 0) {
             studentList.innerHTML = `
-            
-            <div class="empty-message">
-
-                No students available.
-
-                <br><br>
-
-                <a href="students.html">
-                    Add Students
-                </a>
-
-            </div>
-            
-            `;
-        }
-        else
-        {
-            students.slice(-5).reverse().forEach(student =>
-            {
-                studentList.innerHTML += `
-                
-                <div class="list-item">
-
-                    <div>
-
-                        <h3>${student.name}</h3>
-
-                        <p>${student.roll}</p>
-
-                    </div>
-
-                    <span>
-                        ${student.department}
-                    </span>
-
+                <div class="empty-message">
+                    No students available.<br><br>
+                    <a href="students.html">Add Students</a>
                 </div>
-                
+            `;
+        } else {
+            students.slice(-5).reverse().forEach(student => {
+                studentList.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <h3>${student.name}</h3>
+                            <p>${student.roll}</p>
+                        </div>
+                        <span>${student.department}</span>
+                    </div>
                 `;
             });
         }
 
         // COURSES
 
-        const courses =
-        JSON.parse(localStorage.getItem("courses")) || [];
+        const courses = JSON.parse(localStorage.getItem("courses")) || [];
+        const courseList = document.getElementById("courseList");
 
-        const courseList =
-        document.getElementById("courseList");
+        document.getElementById("courseCount").innerText = courses.length;
 
-        document.getElementById("courseCount").innerText =
-        courses.length;
-
-        if(courses.length === 0)
-        {
+        if (courses.length === 0) {
             courseList.innerHTML = `
-            
-            <div class="empty-message">
-
-                No courses available.
-
-                <br><br>
-
-                <a href="courses.html">
-                    Add Courses
-                </a>
-
-            </div>
-            
-            `;
-        }
-        else
-        {
-            courses.slice(-5).reverse().forEach(course =>
-            {
-                courseList.innerHTML += `
-                
-                <div class="list-item">
-
-                    <div>
-
-                        <h3>${course.courseName}</h3>
-
-                        <p>${course.courseCode}</p>
-
-                    </div>
-
-                    <span>
-                        ${course.faculty}
-                    </span>
-
+                <div class="empty-message">
+                    No courses available.<br><br>
+                    <a href="courses.html">Add Courses</a>
                 </div>
-                
+            `;
+        } else {
+            courses.slice(-5).reverse().forEach(course => {
+                courseList.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <h3>${course.courseName}</h3>
+                            <p>${course.courseCode}</p>
+                        </div>
+                        <span>${course.faculty}</span>
+                    </div>
                 `;
             });
         }
 
         // LOGOUT
 
-        function logout()
-        {
+        function logout() {
             localStorage.removeItem("loggedIn");
         }
 
